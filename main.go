@@ -3,17 +3,19 @@ package main
 import(
 "fmt"
 "log"
+"flag"
 "net/http"
 )
 
-func indexHandler( w http.ResponseWriter, r *http.Request){
-fmt.Fprintf(w, "Hello world, I'm answering your request from backend ____")
+var port = flag.String("port", "8080", "port to bind to")
 
+func indexHandler( w http.ResponseWriter, r *http.Request){
+fmt.Fprintf(w, "Hello world, I'm answering your request from backend port %s", *port)
 }
 
 func main(){
+
 http.HandleFunc("/", indexHandler)
-port := ":8080"
-log.Println("EPS Conduit Hello listening on port", port)
-http.ListenAndServe(port ,nil)
+log.Println("EPS Conduit Hello listening on port", *port)
+http.ListenAndServe(":"+*port ,nil)
 }
