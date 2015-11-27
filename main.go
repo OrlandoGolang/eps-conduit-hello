@@ -14,8 +14,8 @@ fmt.Fprintf(w, "Hello world, I'm answering your request from backend port %s", *
 }
 
 func main(){
-
-http.HandleFunc("/", indexHandler)
-log.Println("EPS Conduit Hello listening on port", *port)
-http.ListenAndServe(":"+*port ,nil)
+  flag.Parse()
+  http.HandleFunc("/", indexHandler)
+  log.Println("EPS Conduit Hello listening on port", *port)
+  http.ListenAndServe(":"+*port ,nil)
 }
